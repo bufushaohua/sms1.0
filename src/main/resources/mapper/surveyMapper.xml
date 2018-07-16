@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.app02.dao.surveyMapper">
+  <!-- 查询所有调查表信息 -->
+  <select id="findAll" resultType="com.briup.app02.bean.survey">
+    select * from poll_survey
+  </select>
+  <!-- 通过id查询调查表信息 -->
+  <select id="findById" parameterType="long" resultType="com.briup.app02.bean.survey">
+    select * from poll_survey where id = #{id}
+  </select>
+  <!-- 保存调查表信息 -->
+  <insert id="save" >
+  	insert into poll_survey values(#{survey.id},#{survey.state},#{survey.clazz_id},#{survey.course_id}
+  			#{survey.average},#{survey.teacher_id},#{survey.questionnaire_id})
+  </insert>
+  <!-- 修改调查表信息 -->
+    <update id="update">
+  	update poll_survey 
+  	set id = #{survey.id},state = #{survey.state},clazz_id = #{survey.clazz_id},course_id = #{survey.course_id},
+  		average = #{survey.average},question_id = #{survey.question_id}
+  	where id = #{id}
+  </update>
+  <!-- 删除调查表信息 -->
+  <delete id="deleteById" parameterType = "long">
+  	delete from poll_survey
+  	where id = #{id}
+  </delete>
+</mapper>

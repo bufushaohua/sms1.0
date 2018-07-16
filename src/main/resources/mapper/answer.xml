@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.app02.dao.answerMapper">
+  <!-- 查询所有答案信息 -->
+  <select id="findAll" resultType="com.briup.app02.bean.answer">
+    select * from poll_answer
+  </select>
+  <!-- 通过id查询答案信息 -->
+  <select id="findById" parameterType="long" resultType="com.briup.app02.bean.answer">
+    select * from poll_answer where id = #{id}
+  </select>
+  <!-- 保存答案信息 -->
+  <insert id="save" >
+  	insert into poll_answer values(#{answer.id},#{answer.selection},
+  			#{answer.check},#{answer.content},#{answer.suvery_id})
+  </insert>
+  <!-- 修改答案信息 -->
+    <update id="update">
+  	update poll_answer 
+  	set id = #{answer.id},selection = #{answer.selection},check = #{answer.check},
+  		content = #{answer.content},survey_id = #{survey_id}
+  	where id = #{id}
+  </update>
+  <!-- 删除答案信息 -->
+  <delete id="deleteById" parameterType = "long">
+  	delete from poll_answer
+  	where id = #{id}
+  </delete>
+</mapper>
