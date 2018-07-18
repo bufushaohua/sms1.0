@@ -3,31 +3,44 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.briup.app02.dao.clazzMapper">
+
   <!-- 查询所有班级信息 -->
   <select id="findAll" resultType="com.briup.app02.bean.clazz">
     select * from poll_clazz
   </select>
+  
   <!-- 通过id查询班级信息 -->
   <select id="findById" parameterType="long" resultType="com.briup.app02.bean.clazz">
     select * from poll_clazz where id = #{id}
   </select>
+  
+  <!-- 通过外键grade_id查询班级信息 -->
+  <select id="findByGradeId" parameterType="Long" resultType="com.briup.app02.bean.clazz">
+  	select * from poll_clazz where grade_id = #{id}
+  </select>
+  
+  <!-- 通过外键teacher_id查询班级信息 -->
   <select id="findByteacherId" parameterType="Long" resultType="com.briup.app02.bean.clazz">
   	select * from poll_clazz where teacher_id = #{id}
   </select>
+  
   <!-- 通过班级名查询班级信息 -->
   <select id="findByName" parameterType = "String" resultType = "com.briup.app02.bean.clazz">
   	select * from poll_clazz where name = #{name}
   </select>
+  
   <!-- 通过外键查询班级信息 -->
   <select id="findByFk" resultType = "com.briup.app02.bean.clazz">
   	select * from poll_clazz,poll_grade,poll_teacher
     where poll_grade.id = #{grade} and poll_teacher.id = #{teacher}
   </select>
+  
   <!-- 保存班级信息 -->
   <insert id="save" parameterType = "com.briup.app02.bean.clazz" >
   	insert into poll_clazz values
   	(null,#{name},#{description},#{grade_id},#{teacher_id})
   </insert>
+  
   <!-- 修改班级信息 -->
     <update id="update">
   	update poll_clazz 
@@ -35,9 +48,11 @@
   		grade_id = #{clazz.grade_id},teacher_id = #{clazz.teacher_id}
   	where id = #{id}
   </update>
+  
   <!-- 删除班级信息 -->
   <delete id="deleteById" parameterType = "long">
   	delete from poll_clazz
   	where id = #{id}
   </delete>
+  
 </mapper>

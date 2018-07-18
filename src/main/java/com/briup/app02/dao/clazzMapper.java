@@ -11,6 +11,8 @@ public interface clazzMapper {
 	
 	List<clazz> findByteacherId(Long id);
 	
+	List<clazz> findByGradeId(Long id);
+	
  	List<clazz> findByFk(@Param("grade")Long grade,@Param("teacher")Long teacher);
 	
 	clazz findById(Long id);

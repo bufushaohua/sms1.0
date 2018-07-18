@@ -7,13 +7,16 @@ import org.springframework.stereotype.Service;
 
 import com.briup.app02.bean.questionnaire;
 import com.briup.app02.dao.questionnaireMapper;
+import com.briup.app02.dao.extend.questionnaireVMMapper;
 import com.briup.app02.service.IquestionnaireService;
+import com.briup.app02.vm.questionnaireVM;
 
 @Service
 public class questionnaireServiceImpl implements IquestionnaireService {
 	@Autowired
 	private questionnaireMapper que;
-	
+	@Autowired
+	private questionnaireVMMapper QuestionnaireVMMapper;
 	@Override
 	public List<questionnaire> findAll() throws Exception {
 		//调用questionnaireMapper查询所有学生
@@ -47,6 +50,12 @@ public class questionnaireServiceImpl implements IquestionnaireService {
 		}else{
 			throw new Exception("你要的调查问卷不存在！");
 		}
+	}
+
+	@Override
+	public List<questionnaireVM> findAllQuestionnaireVM() throws Exception {
+		// TODO Auto-generated method stub
+		return QuestionnaireVMMapper.findAllQuestionnaireVM();
 	}
 	
 }

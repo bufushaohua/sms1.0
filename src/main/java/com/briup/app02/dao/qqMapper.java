@@ -11,6 +11,8 @@ public interface qqMapper {
 	
 	qq findById(Long id);
 	
+	List<qq> findByQuestionnaireId(Long id);
+	
 	void save(@Param("qq")qq op);
 	
 	void update(@Param("qq")qq op,@Param("id")Long oldid);

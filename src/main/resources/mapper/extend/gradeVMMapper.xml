@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.app02.dao.extend.gradeVMMapper">
+  <!-- 查询所有班级信息 -->
+  <!-- 
+   gradeVM
+   	 column  -  property
+     id-id,name-name,description-description
+     grade_id - grade 通过grade_id查找grade
+     teacher_id - teacher通过teacher_id查找teacher
+   -->
+  <select id="findAllgradeVM" resultMap="gradeVMResultMap">
+    select * from poll_grade
+  </select>
+  <resultMap type="com.briup.app02.vm.gradeVM" id="gradeVMResultMap">
+  	<id column="id" property="id"/>
+  	<result column="name" property="name"/>
+  	<result column="description" property="description"/>
+	<collection 
+		column="id"
+		property="C"
+		select="com.briup.app02.dao.clazzMapper.findByGradeId"
+	></collection>
+  </resultMap>
+</mapper>

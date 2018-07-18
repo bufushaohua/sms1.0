@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.briup.app02.bean.grade;
 import com.briup.app02.service.IgradeService;
 import com.briup.app02.util.MsgResponse;
+import com.briup.app02.vm.gradeVM;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,7 +26,7 @@ public class gradeController {
 	private IgradeService gradeService;
 
 	// http://127.0.0.1:8080/student/findAllStudent
-	@ApiOperation(value="查找所有年级信息",notes="这是备注")
+	@ApiOperation(value="查找所有年级信息",notes="这是不能级联查询出班级信息")
 	@GetMapping("findAllgrade")
 	public MsgResponse findAllgrade() {
 
@@ -34,6 +35,18 @@ public class gradeController {
 			return MsgResponse.success("查询成功！", list);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	@ApiOperation(value="查找所有年级信息",notes="能够级联查询出班级信息")
+	@GetMapping("findByGradeVM")
+	public MsgResponse findByGradeVM(){
+		try {
+			List<gradeVM> list = gradeService.findAllGradeVM();
+			return MsgResponse.success("查询成功！", list);
+		} catch (Exception e) {
+			// TODO: handle exception
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
 		}

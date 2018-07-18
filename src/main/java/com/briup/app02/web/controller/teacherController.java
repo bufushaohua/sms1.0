@@ -13,6 +13,10 @@ import com.briup.app02.service.IteacherService;
 import com.briup.app02.util.MsgResponse;
 import com.briup.app02.vm.teacherVM;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(description = "教师相关接口")
 @RestController
 @RequestMapping("/teacher")
 public class teacherController {
@@ -20,7 +24,7 @@ public class teacherController {
 	// 注入studentService的实例
 	@Autowired
 	private IteacherService teacherService;
-
+	@ApiOperation(value="查询所有老师信息",notes="不能进行级联操作")
 	// http://127.0.0.1:8080/student/findAllStudent
 	@GetMapping("findAllteacher")
 	public MsgResponse findAllteacher() {
@@ -34,6 +38,7 @@ public class teacherController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
+	@ApiOperation(value="查询所有老师信息",notes="能级联查询出班级信息")
 	@GetMapping("findAllquestionVM")
 	public MsgResponse findAllquestionVM(){
 		try {
@@ -45,6 +50,7 @@ public class teacherController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
+	@ApiOperation(value="通过id查询老师信息",notes="这是备注")
 	@GetMapping("findteacherById")
 	public MsgResponse findtById(long id) {
 		try {
@@ -56,7 +62,7 @@ public class teacherController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-
+	@ApiOperation(value="通过id更新老师信息",notes="这是备注")
 	// 传的值比较多用PostMapper 少就用GetMapper
 	@PostMapping("updateteacher")
 	// 需要返回值 不能给前端工作者造成困扰
@@ -78,6 +84,7 @@ public class teacherController {
 	 * @param teacher
 	 * @return
 	 */
+	@ApiOperation(value="添加老师信息",notes="这是备注")
 	@PostMapping("saveteacher")
 	public MsgResponse saveteacher(teacher te) {
 		try {
@@ -90,7 +97,7 @@ public class teacherController {
 		}
 
 	}
-
+	@ApiOperation(value="通过id删除老师信息",notes="删除老师信息")
 	@GetMapping("deleteteacher")
 	public MsgResponse deleteteacher(long id) {
 		try {

@@ -38,7 +38,7 @@ public class surveyController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-
+	@ApiOperation(value="通过id查找课调信息",notes="这是备注")
 	@GetMapping("findsurveyById")
 	public MsgResponse findtById(long id) {
 		try {
@@ -50,6 +50,7 @@ public class surveyController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
+	@ApiOperation(value="查找课调信息",notes="能级联答案信息")
 	@GetMapping("findAllsurvey_answerVM")
 	public MsgResponse findAllsurvey_answerVM(){
 		try {
@@ -61,6 +62,7 @@ public class surveyController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
+	@ApiOperation(value="查找所有课调信息",notes="能级联出班级信息")
 	@GetMapping("findAllsurveyVM")
 	public MsgResponse findAllsurveyVM(){
 		try {
@@ -71,6 +73,7 @@ public class surveyController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
+	@ApiOperation(value="查找所有课调信息",notes="能级联出年级信息")
 	@GetMapping("findAllnextVM")
 	public MsgResponse findAllnextVM(){
 		try {
@@ -82,6 +85,7 @@ public class surveyController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
+	@ApiOperation(value="通过id更新课调信息",notes="这是备注")
 	// 传的值比较多用PostMapper 少就用GetMapper
 	@PostMapping("updatesurvey")
 	// 需要返回值 不能给前端工作者造成困扰
@@ -103,6 +107,7 @@ public class surveyController {
 	 * @param survey
 	 * @return
 	 */
+	@ApiOperation(value="添加课调信息",notes="这是备注")
 	@PostMapping("savesurvey")
 	public MsgResponse savesurvey(survey su) {
 		try {
@@ -115,7 +120,7 @@ public class surveyController {
 		}
 
 	}
-
+	@ApiOperation(value="通过id删除课调信息",notes="这是备注")
 	@GetMapping("deletesurvey")
 	public MsgResponse deletesurvey(long id) {
 		try {

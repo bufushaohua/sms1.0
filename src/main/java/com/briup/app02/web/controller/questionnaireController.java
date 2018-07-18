@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.briup.app02.bean.questionnaire;
 import com.briup.app02.service.IquestionnaireService;
 import com.briup.app02.util.MsgResponse;
+import com.briup.app02.vm.questionnaireVM;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,6 +34,18 @@ public class questionnaireController {
 			return MsgResponse.success("查询成功！", list);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	@ApiOperation(value="查找所有问卷信息",notes="能够级联查询出问卷与题目关系的信息")
+	@GetMapping("findAllQuestionnaireVM")
+	public MsgResponse findAllQuestionnaireVM(){
+		try {
+			List<questionnaireVM> list = questionnaireService.findAllQuestionnaireVM();
+			return MsgResponse.success("查询成功！", list);
+		} catch (Exception e) {
+			// TODO: handle exception
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
 		}

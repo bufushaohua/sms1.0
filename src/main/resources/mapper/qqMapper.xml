@@ -7,6 +7,10 @@
   <select id="findAll" resultType="com.briup.app02.bean.qq">
     select * from poll_qq
   </select>
+  <!-- 通过questionnaire_id外键查找 -->
+  <select id="findByQuestionnaireId" parameterType="Long" resultType="com.briup.app02.bean.qq">
+  	select * from poll_qq where questionnaire_id = #{id}
+  </select>
   <!-- 通过id查询问题与问卷信息 -->
   <select id="findById" parameterType="long" resultType="com.briup.app02.bean.qq">
     select * from poll_qq where id = #{id}
