@@ -6,20 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.briup.app02.bean.clazz;
-import com.briup.app02.bean.grade;
-import com.briup.app02.bean.teacher;
 import com.briup.app02.dao.clazzMapper;
+import com.briup.app02.dao.extend.clazzVMMapper;
 import com.briup.app02.service.IclazzService;
+import com.briup.app02.vm.clazzVM;
 
-@Service
+@Service//标识类的身份
 public class clazzServiceImpl implements IclazzService {
+	//注入clazzMapper 让spring产生一个clazzMapper的对象 然后送过来
 	@Autowired
 	private clazzMapper cla;
-	private grade grade;
-	private teacher teacher;
+	@Autowired
+	private clazzVMMapper clazzvmmapper;
 	@Override
 	public List<clazz> findAll() throws Exception {
-		//调用clazzMapper查询所有学生
+		//调用clazzMapper查询所有学生 
 		List<clazz> list = cla.findAll();
 		return list;
 	}
@@ -52,9 +53,21 @@ public class clazzServiceImpl implements IclazzService {
 	}
 	//通过外键查询
 	@Override
-	public List<clazz> findByFk(grade gr, teacher te) throws Exception { 
-		List<clazz> list = cla.findByFk(gr, te);
+	public List<clazz> findByFk(Long grade_id, Long teacher_id) throws Exception { 
+		List<clazz> list = cla.findByFk(grade_id, teacher_id);
 		return list;
 	}
+
+	@Override
+	public List<clazz> findByName(String name) throws Exception {
+		List<clazz> list = cla.findByName(name);
+		return list;
+	}
+
+	@Override
+	public List<clazzVM> findAllclazzVM() throws Exception {
+		return clazzvmmapper.findAllclazzVM();
+	}
+
 	
 }

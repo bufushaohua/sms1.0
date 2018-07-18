@@ -11,7 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.briup.app02.bean.survey;
 import com.briup.app02.service.IsurveyService;
 import com.briup.app02.util.MsgResponse;
+import com.briup.app02.vm.surveyVM;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(description = "课调信息接口")
 @RestController
 @RequestMapping("/survey")
 public class surveyController {
@@ -19,7 +24,7 @@ public class surveyController {
 	// 注入studentService的实例
 	@Autowired
 	private IsurveyService surveyService;
-
+	@ApiOperation(value="查找",notes="这是备注")
 	// http://127.0.0.1:8080/student/findAllStudent
 	@GetMapping("findAllsurvey")
 	public MsgResponse findAllsurvey() {
@@ -45,7 +50,38 @@ public class surveyController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-
+	@GetMapping("findAllsurvey_answerVM")
+	public MsgResponse findAllsurvey_answerVM(){
+		try {
+			List<surveyVM> list = surveyService.findAllsurvey_answerVM();
+			return MsgResponse.success("查询成功！", list);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	@GetMapping("findAllsurveyVM")
+	public MsgResponse findAllsurveyVM(){
+		try {
+			List<surveyVM> list = surveyService.findAllsurveyVM();
+			return MsgResponse.success("查询成功！", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	@GetMapping("findAllnextVM")
+	public MsgResponse findAllnextVM(){
+		try {
+			List<surveyVM> list = surveyService.findAllnextVM();
+			return MsgResponse.success("查询成功！", list);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
 	// 传的值比较多用PostMapper 少就用GetMapper
 	@PostMapping("updatesurvey")
 	// 需要返回值 不能给前端工作者造成困扰

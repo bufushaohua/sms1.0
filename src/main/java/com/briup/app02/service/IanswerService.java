@@ -9,6 +9,8 @@ public interface IanswerService {
 	
 	answer findById(Long id) throws Exception;
 	
+	List<answer> findByFk(Long survey_id) throws Exception;
+	
 	void save(answer an) throws Exception;
 	
 	void update(answer an,Long oldid) throws Exception;

@@ -7,13 +7,16 @@ import org.springframework.stereotype.Service;
 
 import com.briup.app02.bean.teacher;
 import com.briup.app02.dao.teacherMapper;
+import com.briup.app02.dao.extend.teacherVMMapper;
 import com.briup.app02.service.IteacherService;
+import com.briup.app02.vm.teacherVM;
 
 @Service
 public class teacherServiceImpl implements IteacherService {
 	@Autowired
 	private teacherMapper tea;
-	
+	@Autowired
+	private teacherVMMapper teachervmmapper;
 	@Override
 	public List<teacher> findAll() throws Exception {
 		//调用studentMapper查询所有学生
@@ -47,6 +50,12 @@ public class teacherServiceImpl implements IteacherService {
 		}else{
 			throw new Exception("你要的教师不存在！");
 		}
+	}
+
+	@Override
+	public List<teacherVM> findAllteacherVM() throws Exception {
+		// TODO Auto-generated method stub
+		return teachervmmapper.findAllteacherVM();
 	}
 	
 }

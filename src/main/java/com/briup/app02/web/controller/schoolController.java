@@ -12,6 +12,10 @@ import com.briup.app02.bean.school;
 import com.briup.app02.service.IschoolService;
 import com.briup.app02.util.MsgResponse;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(description = "学校信息相关接口")
 @RestController
 @RequestMapping("/school")
 public class schoolController {
@@ -21,6 +25,7 @@ public class schoolController {
 	private IschoolService schoolService;
 
 	// http://127.0.0.1:8080/student/findAllStudent
+	@ApiOperation(value="查询所有学校信息",notes="不能进行级联操作")
 	@GetMapping("findAllSchool")
 	public MsgResponse findAllSchool() {
 
@@ -33,7 +38,7 @@ public class schoolController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-
+	@ApiOperation(value="通过id查找学校信息",notes="这是备注")
 	@GetMapping("findSchoolById")
 	public MsgResponse findtById(long id) {
 		try {
@@ -45,7 +50,7 @@ public class schoolController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-
+	@ApiOperation(value="更新学校信息",notes="这是备注")
 	// 传的值比较多用PostMapper 少就用GetMapper
 	@PostMapping("updateSchool")
 	// 需要返回值 不能给前端工作者造成困扰
@@ -67,6 +72,7 @@ public class schoolController {
 	 * @param school
 	 * @return
 	 */
+	@ApiOperation(value="添加学校信息",notes="这是备注")
 	@PostMapping("saveSchool")
 	public MsgResponse saveSchool(school sc,Long id) {
 		try {
@@ -79,7 +85,7 @@ public class schoolController {
 		}
 
 	}
-
+	@ApiOperation(value="通过id删除学校信息",notes="这是备注")
 	@GetMapping("deleteSchool")
 	public MsgResponse deleteSchool(long id) {
 		try {

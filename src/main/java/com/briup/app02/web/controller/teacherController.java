@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.briup.app02.bean.teacher;
 import com.briup.app02.service.IteacherService;
 import com.briup.app02.util.MsgResponse;
+import com.briup.app02.vm.teacherVM;
 
 @RestController
 @RequestMapping("/teacher")
@@ -33,7 +34,17 @@ public class teacherController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-
+	@GetMapping("findAllquestionVM")
+	public MsgResponse findAllquestionVM(){
+		try {
+			List<teacherVM> list = teacherService.findAllteacherVM();
+			return MsgResponse.success("查询成功！", list);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
 	@GetMapping("findteacherById")
 	public MsgResponse findtById(long id) {
 		try {

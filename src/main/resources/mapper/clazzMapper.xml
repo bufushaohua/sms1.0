@@ -11,9 +11,17 @@
   <select id="findById" parameterType="long" resultType="com.briup.app02.bean.clazz">
     select * from poll_clazz where id = #{id}
   </select>
+  <select id="findByteacherId" parameterType="Long" resultType="com.briup.app02.bean.clazz">
+  	select * from poll_clazz where teacher_id = #{id}
+  </select>
+  <!-- 通过班级名查询班级信息 -->
+  <select id="findByName" parameterType = "String" resultType = "com.briup.app02.bean.clazz">
+  	select * from poll_clazz where name = #{name}
+  </select>
   <!-- 通过外键查询班级信息 -->
-  <select id="findByFk">
-  	select * from poll_clazz where grade_id = #{grade} and teacher_id = #{teacher}
+  <select id="findByFk" resultType = "com.briup.app02.bean.clazz">
+  	select * from poll_clazz,poll_grade,poll_teacher
+    where poll_grade.id = #{grade} and poll_teacher.id = #{teacher}
   </select>
   <!-- 保存班级信息 -->
   <insert id="save" parameterType = "com.briup.app02.bean.clazz" >

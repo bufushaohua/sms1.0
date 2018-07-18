@@ -5,15 +5,17 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.briup.app02.bean.clazz;
-import com.briup.app02.bean.grade;
-import com.briup.app02.bean.teacher;
 
 public interface clazzMapper {
 	List<clazz> findAll();
 	
- 	List<clazz> findByFk(@Param("grade")grade gr,@Param("teacher")teacher te);
+	List<clazz> findByteacherId(Long id);
+	
+ 	List<clazz> findByFk(@Param("grade")Long grade,@Param("teacher")Long teacher);
 	
 	clazz findById(Long id);
+	
+	List<clazz> findByName(String name);
 	
 	void save(clazz cl);
 	

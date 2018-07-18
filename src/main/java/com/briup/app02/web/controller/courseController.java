@@ -12,6 +12,10 @@ import com.briup.app02.bean.course;
 import com.briup.app02.service.IcourseService;
 import com.briup.app02.util.MsgResponse;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(description = "课程信息接口")
 @RestController
 @RequestMapping("/course")
 public class courseController {
@@ -21,6 +25,7 @@ public class courseController {
 	private IcourseService courseService;
 
 	// http://127.0.0.1:8080/student/findAllStudent
+	@ApiOperation(value="查找所有课程信息",notes="这是备注")
 	@GetMapping("findAllcourse")
 	public MsgResponse findAllcourse() {
 
@@ -33,7 +38,7 @@ public class courseController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-
+	@ApiOperation(value="通过id查找课程信息",notes="这是备注")
 	@GetMapping("findcourseById")
 	public MsgResponse findtById(long id) {
 		try {
@@ -47,6 +52,7 @@ public class courseController {
 	}
 
 	// 传的值比较多用PostMapper 少就用GetMapper
+	@ApiOperation(value="更新课程信息",notes="这是备注")
 	@PostMapping("updatecourse")
 	// 需要返回值 不能给前端工作者造成困扰
 	public MsgResponse updatecourse(course co,Long oldid) {
@@ -67,6 +73,7 @@ public class courseController {
 	 * @param course
 	 * @return
 	 */
+	@ApiOperation(value="添加课程信息",notes="这是备注")
 	@PostMapping("savecourse")
 	public MsgResponse savecourse(course co) {
 		try {
@@ -79,7 +86,7 @@ public class courseController {
 		}
 
 	}
-
+	@ApiOperation(value="通过id删除课程信息",notes="这是备注")
 	@GetMapping("deletecourse")
 	public MsgResponse deletecourse(long id) {
 		try {

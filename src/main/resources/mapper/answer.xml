@@ -11,10 +11,18 @@
   <select id="findById" parameterType="long" resultType="com.briup.app02.bean.answer">
     select * from poll_answer where id = #{id}
   </select>
+  <!-- 通过survey_id查找答案 -->
+  <select id="findBysurveyId" parameterType="Long" resultType="com.briup.app02.bean.answer">
+  	select * from poll_answer where survey_id = #{id}
+  </select>
+  <!-- 通过外键查询答案信息 -->
+  <select id="findByFk" parameterType = "Long" resultType = "com.briup.app02.bean.answer">
+  	select * from poll_answer,poll_survey where poll_survey.id = #{survey_id}
+  </select>
   <!-- 保存答案信息 -->
   <insert id="save" >
   	insert into poll_answer values(#{answer.id},#{answer.selection},
-  			#{answer.check},#{answer.content},#{answer.suvery_id})
+  			#{answer.check},#{answer.content},#{answer.survey_id})
   </insert>
   <!-- 修改答案信息 -->
     <update id="update">

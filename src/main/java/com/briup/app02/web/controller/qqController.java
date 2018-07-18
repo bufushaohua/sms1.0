@@ -11,7 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.briup.app02.bean.qq;
 import com.briup.app02.service.IqqService;
 import com.briup.app02.util.MsgResponse;
+import com.briup.app02.vm.qqVM;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(description = "问题与问卷关系信息接口")
 @RestController
 @RequestMapping("/qq")
 public class qqController {
@@ -21,6 +26,7 @@ public class qqController {
 	private IqqService qqService;
 
 	// http://127.0.0.1:8080/student/findAllStudent
+	@ApiOperation(value="查找所有问题与问卷关系信息",notes="不能进行级联操作")
 	@GetMapping("findAllqq")
 	public MsgResponse findAllqq() {
 
@@ -33,7 +39,7 @@ public class qqController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-
+	@ApiOperation(value="通过id查找问题与问卷关系信息",notes="这是备注")
 	@GetMapping("findqqById")
 	public MsgResponse findtById(long id) {
 		try {
@@ -45,8 +51,19 @@ public class qqController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-
+	@ApiOperation(value="查找所有问题与问卷信息",notes="可以进行级联操作")
+	@GetMapping("findAllqqVM")
+	public MsgResponse findAllqqVM(){
+		try {
+			List<qqVM> list = qqService.findAlqqVM();
+			return MsgResponse.success("查找成功！", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
 	// 传的值比较多用PostMapper 少就用GetMapper
+	@ApiOperation(value="更新所有问题与问卷信息",notes="这是备注")
 	@PostMapping("updateqq")
 	// 需要返回值 不能给前端工作者造成困扰
 	public MsgResponse updateqq(qq op,Long oldid) {
@@ -67,6 +84,7 @@ public class qqController {
 	 * @param qq
 	 * @return
 	 */
+	@ApiOperation(value="添加新的问题与问卷关系信息",notes="这是备注")
 	@PostMapping("saveqq")
 	public MsgResponse saveqq(qq op) {
 		try {
@@ -79,7 +97,7 @@ public class qqController {
 		}
 
 	}
-
+	@ApiOperation(value="通过id删除问题与问卷关系信息",notes="这是备注")
 	@GetMapping("deleteqq")
 	public MsgResponse deleteqq(long id) {
 		try {

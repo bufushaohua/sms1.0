@@ -11,6 +11,10 @@ public interface answerMapper {
 	
 	answer findById(Long id);
 	
+	List<answer> findBysurveyId(Long id);
+	
+	List<answer> findByFk(Long survey_id);
+	
 	void save(@Param("answer")answer an);
 	
 	void update(@Param("answer")answer an,@Param("id")Long oldid);

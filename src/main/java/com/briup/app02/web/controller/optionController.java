@@ -11,7 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.briup.app02.bean.option;
 import com.briup.app02.service.IoptionService;
 import com.briup.app02.util.MsgResponse;
+import com.briup.app02.vm.optionVM;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(description = "选项信息接口")
 @RestController
 @RequestMapping("/option")
 public class optionController {
@@ -21,6 +26,7 @@ public class optionController {
 	private IoptionService optionService;
 
 	// http://127.0.0.1:8080/student/findAllStudent
+	@ApiOperation(value="查找所有选项",notes="不能进行级联操作")
 	@GetMapping("findAlloption")
 	public MsgResponse findAlloption() {
 
@@ -33,7 +39,19 @@ public class optionController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-
+	@ApiOperation(value="通过外键查询选项",notes="这是备注")
+	@GetMapping("findByFk")
+	public MsgResponse findByFk(Long question_id){
+		try {
+			List<option> list = optionService.findByFk(question_id);
+			return MsgResponse.success("查询成功！", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+		
+	}
+	@ApiOperation(value="通过id查找选项",notes="这是备注")
 	@GetMapping("findoptionById")
 	public MsgResponse findtById(long id) {
 		try {
@@ -45,8 +63,19 @@ public class optionController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-
+	@ApiOperation(value="查找所有选项信息",notes="级联操作")
+	@GetMapping("findAlloptionVM")
+	public MsgResponse findAlloptionVM(){
+		try {
+			List<optionVM> list = optionService.findAlloptionVM();
+			return MsgResponse.success("查询成功！", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
 	// 传的值比较多用PostMapper 少就用GetMapper
+	@ApiOperation(value="更新选项信息",notes="这是备注")
 	@PostMapping("updateoption")
 	// 需要返回值 不能给前端工作者造成困扰
 	public MsgResponse updateoption(option op,Long oldid) {
@@ -67,6 +96,7 @@ public class optionController {
 	 * @param option
 	 * @return
 	 */
+	@ApiOperation(value="添加选项信息",notes="这是备注")
 	@PostMapping("saveoption")
 	public MsgResponse saveoption(option op) {
 		try {
@@ -79,7 +109,7 @@ public class optionController {
 		}
 
 	}
-
+	@ApiOperation(value="通过id删除选项",notes="这是备注")
 	@GetMapping("deleteoption")
 	public MsgResponse deleteoption(long id) {
 		try {

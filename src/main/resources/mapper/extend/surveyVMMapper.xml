@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.app02.dao.extend.surveyVMMapper">
+  <!-- 查询所有班级信息 -->
+  <!-- 
+   surveyVM
+   	 column  -  property
+   -->
+  <select id="findAllsurveyVM" resultMap="surveyVMResultMap">
+    select * from poll_survey
+  </select>
+  <resultMap type="com.briup.app02.vm.surveyVM" id="surveyVMResultMap">
+  	<id column="id" property="id"/>
+  	<result column="state" property="state"/>
+  	<result column="average" property="average"/>
+  	<association 
+  		column="questionnaire_id"
+  		property="questionnaire"
+  		select="com.briup.app02.dao.questionnaireMapper.findById">	
+  	</association>
+  	<association 
+  		column="clazz_id"
+  		property="clazz"
+  		select="com.briup.app02.dao.clazzMapper.findById">	
+  	</association>
+  	<association 
+  		column="teacher_id"
+  		property="teacher"
+  		select="com.briup.app02.dao.teacherMapper.findById">	
+  	</association>
+  	<association 
+  		column="course_id"
+  		property="course"
+  		select="com.briup.app02.dao.courseMapper.findById">	
+  	</association>
+  </resultMap>
+  
+  
+  <!-- 查找班级成绩中包含的年级信息 -->
+  <select id="findAllnextVM" resultMap="nextVMResultMap">
+  	select * from poll_survey
+  </select>
+  <resultMap type="com.briup.app02.vm.surveyVM" id="nextVMResultMap">
+  	<id column="id" property="id"/>
+  	<result column="state" property="state"/>
+  	<result column="average" property="average"/>
+  	<association 
+  		column="questionnaire_id"
+  		property="questionnaire"
+  		select="com.briup.app02.dao.questionnaireMapper.findById">	
+  	</association>
+  	<association 
+  		column="clazz_id"
+  		property="class_grade"
+  		select="com.briup.app02.dao.extend.clazzVMMapper.findAllclazzVM">	
+  	</association>
+  	<association 
+  		column="teacher_id"
+  		property="teacher"
+  		select="com.briup.app02.dao.teacherMapper.findById">	
+  	</association>
+  	<association 
+  		column="course_id"
+  		property="course"
+  		select="com.briup.app02.dao.courseMapper.findById">	
+  	</association>
+  </resultMap>
+  
+  <!-- 查询survey的级联表answer -->
+  <select id="findAllsurvey_answerVM" resultMap="survey_answerVMResultMap">
+    select * from poll_survey
+  </select>
+  <resultMap type="com.briup.app02.vm.surveyVM" id="survey_answerVMResultMap">
+  	<id column="id" property="id"/>
+  	<result column="state" property="state"/>
+  	<result column="average" property="average"/>
+  	<collection 
+  		column="id"
+  		property="answer"
+  		select="com.briup.app02.dao.answerMapper.findBysurveyId"	
+  	></collection>
+  </resultMap>
+  
+</mapper>

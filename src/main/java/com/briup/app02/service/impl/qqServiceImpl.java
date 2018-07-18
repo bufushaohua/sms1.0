@@ -7,13 +7,16 @@ import org.springframework.stereotype.Service;
 
 import com.briup.app02.bean.qq;
 import com.briup.app02.dao.qqMapper;
+import com.briup.app02.dao.extend.qqVMMapper;
 import com.briup.app02.service.IqqService;
+import com.briup.app02.vm.qqVM;
 
 @Service
 public class qqServiceImpl implements IqqService {
 	@Autowired
 	private qqMapper opt;
-	
+	@Autowired
+	private qqVMMapper qqvmmapper;
 	@Override
 	public List<qq> findAll() throws Exception {
 		//调用qqMapper查询所有学生
@@ -47,6 +50,11 @@ public class qqServiceImpl implements IqqService {
 		}else{
 			throw new Exception("你要的选项不存在！");
 		}
+	}
+
+	@Override
+	public List<qqVM> findAlqqVM() throws Exception {
+		return qqvmmapper.findAllqqVM();
 	}
 	
 }

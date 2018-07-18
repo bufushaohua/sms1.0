@@ -3,9 +3,12 @@ package com.briup.app02.service;
 import java.util.List;
 
 import com.briup.app02.bean.qq;
+import com.briup.app02.vm.qqVM;
 
 public interface IqqService {
 	List<qq> findAll() throws Exception;
+	
+	List<qqVM> findAlqqVM() throws Exception;
 	
 	qq findById(Long id) throws Exception;
 	

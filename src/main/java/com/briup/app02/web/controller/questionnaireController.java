@@ -12,6 +12,10 @@ import com.briup.app02.bean.questionnaire;
 import com.briup.app02.service.IquestionnaireService;
 import com.briup.app02.util.MsgResponse;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(description = "问卷相关接口")
 @RestController
 @RequestMapping("/questionnaire")
 public class questionnaireController {
@@ -19,7 +23,7 @@ public class questionnaireController {
 	// 注入studentService的实例
 	@Autowired
 	private IquestionnaireService questionnaireService;
-
+	@ApiOperation(value="查找所有问卷信息",notes="不能进行级联操作")
 	// http://127.0.0.1:8080/student/findAllStudent
 	@GetMapping("findAllquestionnaire")
 	public MsgResponse findAllquestionnaire() {
@@ -33,7 +37,7 @@ public class questionnaireController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-
+	@ApiOperation(value="通过id查找所有问卷",notes="这是备注")
 	@GetMapping("findquestionnaireById")
 	public MsgResponse findtById(long id) {
 		try {
@@ -45,7 +49,7 @@ public class questionnaireController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-
+	@ApiOperation(value="更新问卷信息",notes="这是备注")
 	// 传的值比较多用PostMapper 少就用GetMapper
 	@PostMapping("updatequestionnaire")
 	// 需要返回值 不能给前端工作者造成困扰
@@ -67,6 +71,7 @@ public class questionnaireController {
 	 * @param questionnaire
 	 * @return
 	 */
+	@ApiOperation(value="添加问卷信息",notes="这是备注")
 	@PostMapping("savequestionnaire")
 	public MsgResponse savequestionnaire(questionnaire qu) {
 		try {
@@ -79,7 +84,7 @@ public class questionnaireController {
 		}
 
 	}
-
+	@ApiOperation(value="通过id删除问卷信息",notes="这是备注")
 	@GetMapping("deletequestionnaire")
 	public MsgResponse deletequestionnaire(long id) {
 		try {

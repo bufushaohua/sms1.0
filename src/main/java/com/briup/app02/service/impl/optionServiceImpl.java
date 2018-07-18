@@ -7,13 +7,16 @@ import org.springframework.stereotype.Service;
 
 import com.briup.app02.bean.option;
 import com.briup.app02.dao.optionMapper;
+import com.briup.app02.dao.extend.optionVMMapper;
 import com.briup.app02.service.IoptionService;
+import com.briup.app02.vm.optionVM;
 
 @Service
 public class optionServiceImpl implements IoptionService {
 	@Autowired
 	private optionMapper opt;
-	
+	@Autowired 
+	private optionVMMapper optionvmmapper;
 	@Override
 	public List<option> findAll() throws Exception {
 		//调用optionMapper查询所有学生
@@ -47,6 +50,17 @@ public class optionServiceImpl implements IoptionService {
 		}else{
 			throw new Exception("你要的选项不存在！");
 		}
+	}
+
+	@Override
+	public List<option> findByFk(Long question_id) {
+		List<option> list = opt.findByFk(question_id);
+		return list;
+	}
+
+	@Override
+	public List<optionVM> findAlloptionVM() throws Exception {
+		return optionvmmapper.findAlloptionVM();
 	}
 	
 }

@@ -12,6 +12,10 @@ import com.briup.app02.bean.grade;
 import com.briup.app02.service.IgradeService;
 import com.briup.app02.util.MsgResponse;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(description = "年级信息接口")
 @RestController
 @RequestMapping("/grade")
 public class gradeController {
@@ -21,6 +25,7 @@ public class gradeController {
 	private IgradeService gradeService;
 
 	// http://127.0.0.1:8080/student/findAllStudent
+	@ApiOperation(value="查找所有年级信息",notes="这是备注")
 	@GetMapping("findAllgrade")
 	public MsgResponse findAllgrade() {
 
@@ -33,7 +38,7 @@ public class gradeController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-
+	@ApiOperation(value="通过id查找年级",notes="这是备注")
 	@GetMapping("findgradeById")
 	public MsgResponse findtById(long id) {
 		try {
@@ -45,7 +50,7 @@ public class gradeController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-
+	@ApiOperation(value="更新年级信息",notes="这是备注")
 	// 传的值比较多用PostMapper 少就用GetMapper
 	@PostMapping("updategrade")
 	// 需要返回值 不能给前端工作者造成困扰
@@ -67,6 +72,7 @@ public class gradeController {
 	 * @param grade
 	 * @return
 	 */
+	@ApiOperation(value="添加一个年级信息",notes="这是备注")
 	@PostMapping("savegrade")
 	public MsgResponse savegrade(grade sc) {
 		try {
@@ -79,7 +85,7 @@ public class gradeController {
 		}
 
 	}
-
+	@ApiOperation(value="通过id删除年级信息",notes="这是备注")
 	@GetMapping("deletegrade")
 	public MsgResponse deletegrade(long id) {
 		try {

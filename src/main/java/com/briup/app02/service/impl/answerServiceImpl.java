@@ -48,5 +48,11 @@ public class answerServiceImpl implements IanswerService {
 			throw new Exception("你要的答案不存在！");
 		}
 	}
+
+	@Override
+	public List<answer> findByFk(Long survey_id) throws Exception {
+		List<answer> list = ans.findByFk(survey_id);
+		return list;
+	}
 	
 }

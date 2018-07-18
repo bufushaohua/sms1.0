@@ -11,7 +11,7 @@ public interface questionMapper {
 	
 	question findById(Long id);
 	
-	void save(@Param("question")question qu);
+	void save(question qu);
 	
 	void update(@Param("question")question qu,@Param("id")Long oldid);
 	

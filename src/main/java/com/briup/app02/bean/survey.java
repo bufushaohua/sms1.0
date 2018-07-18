@@ -4,6 +4,7 @@ public class survey {
 	private Long id;
 	private String state;
 	private Double average;
+	private String surveydate;
 	private Long questionnaire_id;
 	private Long teacher_id;
 	private Long clazz_id;

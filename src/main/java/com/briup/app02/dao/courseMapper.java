@@ -11,6 +11,8 @@ public interface courseMapper {
 	
 	course findById(Long id);
 	
+	List<course> findByName(String name);
+	
 	void save(@Param("course")course co);
 	
 	void update(@Param("course")course co,@Param("id")Long oldid);

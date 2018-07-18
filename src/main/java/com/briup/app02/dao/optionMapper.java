@@ -11,7 +11,11 @@ public interface optionMapper {
 	
 	option findById(Long id);
 	
-	void save(@Param("option")option op);
+	List<option> findByQuestionId(Long id);
+	
+	List<option> findByFk(Long question_id);
+	
+	void save(option op);
 	
 	void update(@Param("option")option op,@Param("id")Long oldid);
 	

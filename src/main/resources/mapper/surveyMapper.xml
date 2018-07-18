@@ -13,8 +13,8 @@
   </select>
   <!-- 保存调查表信息 -->
   <insert id="save" >
-  	insert into poll_survey values(#{survey.id},#{survey.state},#{survey.clazz_id},#{survey.course_id}
-  			#{survey.average},#{survey.teacher_id},#{survey.questionnaire_id})
+  	insert into poll_survey values(#{survey.id},#{survey.state},#{survey.average},#{survey.surveydate},
+  	#{survey.questionnaire_id},#{survey.clazz_id},#{survey.teacher_id},#{survey.course_id})
   </insert>
   <!-- 修改调查表信息 -->
     <update id="update">

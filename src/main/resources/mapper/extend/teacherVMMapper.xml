@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.app02.dao.extend.teacherVMMapper">
+  <!-- 查询所有班级信息 -->
+  <!-- 
+   teacherVM
+   	 column  -  property
+   -->
+  <select id="findAllteacherVM" resultMap="teacherVMResultMap">
+    select * from poll_teacher
+  </select>
+  <resultMap type="com.briup.app02.vm.teacherVM" id="teacherVMResultMap">
+  	<id column="id" property="id"/>
+  	<result column="name" property="name"/>
+  	<result column="gender" property="gender"/>
+  	<result column="birth" property="birth"/>
+  	<result column="hiredate" property="hiredate"/>
+  	<collection 
+  		column="id" 
+  		property="clazzs"
+  		select="com.briup.app02.dao.clazzMapper.findByteacherId"
+  	></collection>
+  </resultMap>
+</mapper>
